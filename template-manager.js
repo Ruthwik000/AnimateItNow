@@ -276,16 +276,13 @@
       checkbox.type = 'checkbox'
       checkbox.className = 'template-select-checkbox'
       checkbox.title = 'Select for export'
-      checkbox.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); checkbox.checked = !checkbox.checked; card.classList.toggle('selected', checkbox.checked) })
-      checkbox.addEventListener('change', (e) => { e.stopPropagation(); card.classList.toggle('selected', checkbox.checked) })
+      checkbox.addEventListener('click', (e) => { e.stopPropagation() })
+      checkbox.addEventListener('change', () => { card.classList.toggle('selected', checkbox.checked) })
       card.prepend(checkbox)
 
-      // Prevent navigation when interacting within checkbox area
+      // Prevent navigation only when clicking the checkbox itself
       card.addEventListener('click', (e) => {
-        const target = e.target
-        if (target === checkbox) {
-          e.preventDefault(); e.stopPropagation()
-        }
+        if (e.target === checkbox) { e.stopPropagation(); e.preventDefault() }
       }, true)
     })
 

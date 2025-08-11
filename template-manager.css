@@ -43,7 +43,9 @@
   width: 20px;
   height: 20px;
   transform: scale(1.1);
-  z-index: 2;
+  z-index: 1000;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .template-card.selectable::after {
