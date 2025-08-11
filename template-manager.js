@@ -307,7 +307,7 @@
       openExportModal(async (options, setProgress) => {
         const items = await gatherTemplateItems(selected)
         const { blob } = await packager.exportBulk(items, { ...options, onProgress: p => setProgress(p) })
-        blobDownload(blob, `templates-bulk${PACKAGE_EXT}`)
+        blobDownload(blob, `templates-bulk.zip`)
       })
     })
 
@@ -316,7 +316,7 @@
       openExportModal(async (options, setProgress) => {
         const items = await gatherTemplateItems(allCards)
         const { blob } = await packager.exportBulk(items, { ...options, onProgress: p => setProgress(p) })
-        blobDownload(blob, `all-templates${PACKAGE_EXT}`)
+        blobDownload(blob, `all-templates.zip`)
       })
     })
 
@@ -607,11 +607,17 @@
       confirmBtn.disabled = true
       setStatus('Installing...')
       try {
+        // Simulate progress updates during import
+        const update = (p) => { progressBar.style.width = `${Math.floor(p)}%` }
+        update(5)
+        await new Promise(r => setTimeout(r, 100))
+        update(30)
         await onConfirmHandler(file, {
           setStatus,
           setError,
           pickConflictResolution,
         })
+        update(100)
         close()
       } finally {
         confirmBtn.disabled = false
@@ -635,14 +641,15 @@
     if (!onTemplatesPage) return
 
     // Load JSZip
+    const boot = () => { initTemplateManagerUI(); refreshGalleryFromDB().catch(()=>{}) }
     if (!window.JSZip) {
       const s = document.createElement('script')
       s.src = 'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'
       document.head.appendChild(s)
-      s.onload = () => initTemplateManagerUI()
+      s.onload = () => boot()
       s.onerror = () => console.error('Failed to load JSZip')
     } else {
-      initTemplateManagerUI()
+      boot()
     }
   })
 })()
