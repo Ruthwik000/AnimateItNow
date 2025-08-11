@@ -853,6 +853,7 @@
     <script src="dependency-resolver.js"></script>
     <script src="package-validator.js"></script>
     <script src="template-manager.js"></script>
+    <script src="scroll-reveal-manager.js"></script>
     <!--  Added link to your shared script.js -->
     <script src="script.js"></script>
     <script>
@@ -886,20 +887,14 @@
 
       lucide.createIcons();
 
-      // Scroll animation for cards
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-      document.querySelectorAll(".template-card").forEach((card) => {
-        observer.observe(card);
-      });
+      // Scroll animation for cards via singleton manager
+      if (window.scrollRevealManager) {
+        document.querySelectorAll('.template-card').forEach((card) => {
+          if (!card.classList.contains('visible')) {
+            window.scrollRevealManager.observe(card);
+          }
+        });
+      }
 
       // Search & Category Filter Functionality
       const searchBar = document.getElementById("search-bar");

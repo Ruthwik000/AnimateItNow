@@ -161,48 +161,58 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   } catch (e) { console.warn('Template manager init skipped:', e) }
 
-  // Theme toggle
+  // Theme toggle (batched to prevent flicker)
   const themeToggle = document.getElementById("theme-toggle")
   const body = document.body
   function setTheme(dark) {
-    const newIcon = dark ? "sun" : "moon"
-    body.classList.toggle("dark", dark) // Use 'dark' class for consistency
-    localStorage.setItem("theme", dark ? "dark" : "light")
-    // Replace icon completely
-    if (themeToggle) {
-      themeToggle.innerHTML = `<i data-lucide="${newIcon}"></i>`
-      // Only call lucide.createIcons() if the lucide object is actually available
-      if (window.lucide) {
-        window.lucide.createIcons()
+    window.requestAnimationFrame(() => {
+      const newIcon = dark ? "sun" : "moon"
+      body.classList.toggle("dark", dark)
+      localStorage.setItem("theme", dark ? "dark" : "light")
+      if (themeToggle) {
+        themeToggle.innerHTML = `<i data-lucide="${newIcon}"></i>`
+        if (window.lucide) {
+          window.lucide.createIcons()
+        }
       }
-    }
+      // Ensure revealed elements retain visibility during theme swap
+      document.querySelectorAll('.scroll-fade.visible, .template-card.visible').forEach((el) => {
+        el.classList.add('visible')
+      })
+    })
   }
   const savedTheme = localStorage.getItem("theme")
   setTheme(savedTheme === "dark")
   themeToggle?.addEventListener("click", () => {
-    const isDark = body.classList.contains("dark") // Check for 'dark' class
+    const isDark = body.classList.contains("dark")
     setTheme(!isDark)
   })
-  // Only call lucide.createIcons() if the lucide object is actually available
-  // This ensures icons are created on initial load if the library is ready.
   if (window.lucide) {
     window.lucide.createIcons()
   }
 
-  // 🔽 Scroll Reveal Animation
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible")
-          // observer.unobserve(entry.target); // uncomment to animate only once
+  // 🔽 Scroll Reveal Animation via singleton manager
+  const initScrollReveal = () => {
+    if (window.scrollRevealManager) {
+      document.querySelectorAll('.scroll-fade, .template-card').forEach((el) => {
+        if (!el.classList.contains('visible')) {
+          window.scrollRevealManager.observe(el)
         }
       })
-    },
-    { threshold: 0.2 },
-  )
-  document.querySelectorAll(".scroll-fade").forEach((el) => {
-    observer.observe(el)
+    }
+  }
+  initScrollReveal()
+
+  // Re-init on bfcache restore
+  window.addEventListener('pageshow', () => {
+    initScrollReveal()
+  })
+
+  // Clean up observer on navigation to prevent leaks
+  window.addEventListener('pagehide', () => {
+    if (window.scrollRevealManager) {
+      window.scrollRevealManager.disconnect()
+    }
   })
 
   // 🧪 Testimonial slider
