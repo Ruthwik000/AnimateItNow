@@ -120,6 +120,7 @@ body.dark .ripple::before {
   margin-bottom: 1.5rem;
 }
 
+/* Keep backward compatibility for old .dark-theme but prefer .dark */
 body.dark-theme .no-results,
 body.dark .no-results {
   color: #fff;         /* White for dark mode */
