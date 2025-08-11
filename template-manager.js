@@ -270,15 +270,25 @@
 
     // Add checkboxes to each template card
     document.querySelectorAll('.template-card').forEach((card) => {
+      // For anchor cards, wrap in a container to ensure checkbox is outside clickable area
+      let container = card
+      if (card.tagName === 'A' && !card.closest('.template-card-container')) {
+        const wrapper = document.createElement('div')
+        wrapper.className = 'template-card-container selectable'
+        card.parentNode.insertBefore(wrapper, card)
+        wrapper.appendChild(card)
+        container = wrapper
+      }
       if (!card.classList.contains('selectable')) card.classList.add('selectable')
       if (card.querySelector('.template-select-checkbox')) return
       const checkbox = document.createElement('input')
       checkbox.type = 'checkbox'
       checkbox.className = 'template-select-checkbox'
       checkbox.title = 'Select for export'
-      checkbox.addEventListener('click', (e) => { e.stopPropagation() })
+      checkbox.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault() })
+      checkbox.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); checkbox.checked = !checkbox.checked; checkbox.dispatchEvent(new Event('change', { bubbles: false })) })
       checkbox.addEventListener('change', () => { card.classList.toggle('selected', checkbox.checked) })
-      card.prepend(checkbox)
+      ;(container || card).appendChild(checkbox)
 
       // Prevent navigation only when clicking the checkbox itself
       card.addEventListener('click', (e) => {

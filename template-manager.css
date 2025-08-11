@@ -32,9 +32,11 @@
 }
 
 /* Selection mode */
-.template-card {
+.template-card, .template-card-container {
   position: relative;
 }
+
+.template-card-container { display: block; }
 
 .template-select-checkbox {
   position: absolute;
@@ -48,7 +50,7 @@
   cursor: pointer;
 }
 
-.template-card.selectable::after {
+.template-card.selectable::after, .template-card-container.selectable::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -57,7 +59,7 @@
   pointer-events: none;
 }
 
-.template-card.selected {
+.template-card.selected, .template-card-container.selected {
   outline: 3px solid #22d3ee;
   outline-offset: -3px;
 }
