@@ -70,7 +70,8 @@
       </a>
     </div>
     <div class="nav-right">
-      <ul class="nav-links">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links" id="primary-navigation">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="templates.html">Templates</a></li>
@@ -325,6 +326,7 @@
   </footer>
   <div id="cursor-snake"></div>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="responsive-utils.js" defer></script>
   <script src="script.js"></script>
   <button onclick="scrollToTop()" id="scrollBtn" title="Go to top">↑</button>
 </body>
