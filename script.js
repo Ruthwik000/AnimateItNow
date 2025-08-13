@@ -1,17 +1,114 @@
-﻿
+
+// Mobile Navigation Toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const body = document.body;
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+      
+      // Toggle classes
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      
+      // Update ARIA attributes
+      navToggle.setAttribute('aria-expanded', !isExpanded);
+      
+      // Prevent background scroll when menu is open
+      if (!isExpanded) {
+        body.style.overflow = 'hidden';
+      } else {
+        body.style.overflow = '';
+      }
+    });
+
+    // Close menu when clicking on links
+    const navLinksItems = navLinks.querySelectorAll('a');
+    navLinksItems.forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      });
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+        navToggle.focus();
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      }
+    });
+  }
+});
+
 // Function for displaying FAQ categories
 function displaycategory(category){
   const general=document.getElementById('general-faq');
   const technical=document.getElementById('technical-faq');
+  const generalTab=document.getElementById('general-tab');
+  const technicalTab=document.getElementById('technical-tab');
+  
   if(category==='general'){
     general.style.display='block';
     technical.style.display='none';
+    generalTab.setAttribute('aria-selected', 'true');
+    technicalTab.setAttribute('aria-selected', 'false');
   }
   else if(category==='technical'){
     general.style.display='none';
     technical.style.display='block';
+    generalTab.setAttribute('aria-selected', 'false');
+    technicalTab.setAttribute('aria-selected', 'true');
   }
 }
+
+// Function for toggling FAQ items with proper ARIA support
+function toggleFAQ(element) {
+  const faqItem = element.parentElement;
+  const answer = faqItem.querySelector('.faq-answer');
+  const isExpanded = element.getAttribute('aria-expanded') === 'true';
+  
+  // Toggle the expanded state
+  element.setAttribute('aria-expanded', !isExpanded);
+  
+  // Toggle the active class for styling
+  faqItem.classList.toggle('active');
+  
+  // Handle display with smooth animation
+  if (!isExpanded) {
+    answer.style.display = 'block';
+  } else {
+    answer.style.display = 'none';
+  }
+}
+
 // Service worker registration removed to fix 404 error
 // if ('serviceWorker' in navigator) {
 //   window.addEventListener('load', () => {
