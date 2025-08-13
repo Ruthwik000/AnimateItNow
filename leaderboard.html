@@ -546,14 +546,19 @@
 </head>
 <body>
 <!--Using EXACT navbar structure - NO custom navbar CSS -->
-<nav class="navbar scroll-fade">
+<nav class="navbar scroll-fade" role="navigation" aria-label="Main">
 
 <div class="nav-left">
   <img src="images/logo.png" alt="AnimateItNow Logo" class="logo" />
   <span class="site-name">Animate It Now</span>
 </div>
+<button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
 <div class="nav-right">
-  <ul class="nav-links">
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="templates.html">Templates</a></li>
@@ -946,6 +951,8 @@ init(); /*  */
 <!--Required scripts for icons and functionality -->
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="script.js"></script>
+<script src="responsive-utils.js"></script>
+<script>window.ResponsiveManagers && window.ResponsiveManagers.init();</script>
 <!-- PWA Support -->
 <!--  Confetti effect on page load script is outside the body, moved it inside. -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
