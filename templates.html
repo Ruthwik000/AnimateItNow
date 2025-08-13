@@ -587,7 +587,8 @@
       </div>
 
       <div class="nav-right">
-        <ul class="nav-links">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation">☰</button>
+        <ul class="nav-links" id="primary-navigation">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="templates.html" class="active">Templates</a></li>
@@ -1209,5 +1210,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
     </script>
-  </body>
+    <script src="responsive-utils.js" defer></script>
+</body>
 </html>

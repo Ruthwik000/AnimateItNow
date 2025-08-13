@@ -23,7 +23,8 @@
     </div>
 
     <div class="nav-right">
-      <ul class="nav-links">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links" id="primary-navigation">
         <!-- remove active from Home -->
         <li><a href="index.html">Home</a></li>
         <!-- make active to About as you are in about -->
@@ -231,6 +232,7 @@
       }
     });
   </script>
+  <script src="responsive-utils.js" defer></script>
   <script src="script.js"></script>
   </body>
 
