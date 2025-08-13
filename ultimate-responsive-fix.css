@@ -1,0 +1,683 @@
+/* =====================================================
+   ULTIMATE RESPONSIVE FIX FOR ALL DEVICES
+   Mobile (≤480px), Mobile Large (481px-767px), 
+   Tablet (768px-1024px), Desktop (≥1025px)
+   ===================================================== */
+
+/* RESET AND BASE STYLES */
+* {
+  box-sizing: border-box !important;
+}
+
+body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* =====================================================
+   NAVIGATION BAR - ALL DEVICES
+   ===================================================== */
+
+/* Base Navbar Styles */
+.navbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 15px 20px !important;
+  background: rgba(2, 13, 47, 1) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  min-height: 70px !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.nav-left {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.logo-link {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.logo {
+  height: 32px !important;
+  width: auto !important;
+  flex-shrink: 0 !important;
+}
+
+/* Desktop Navigation */
+.nav-links {
+  display: flex !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 20px !important;
+  align-items: center !important;
+}
+
+.nav-links li {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: none !important;
+  padding: 10px 15px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
+  transition: all 0.3s ease !important;
+  white-space: nowrap !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.nav-links a.active {
+  color: #ffffff !important;
+  background: rgba(79, 140, 255, 0.3) !important;
+  font-weight: 600 !important;
+}
+
+/* Hide toggle button on desktop */
+.nav-toggle {
+  display: none !important;
+}
+
+/* =====================================================
+   TABLET RESPONSIVE (768px - 1024px)
+   ===================================================== */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .navbar {
+    padding: 12px 25px !important;
+  }
+  
+  .nav-links {
+    gap: 15px !important;
+  }
+  
+  .nav-links a {
+    font-size: 15px !important;
+    padding: 8px 12px !important;
+  }
+  
+  .site-name {
+    font-size: 18px !important;
+  }
+  
+  /* Hide some nav items on smaller tablets if needed */
+  .nav-links li:nth-child(n+6) {
+    display: none !important;
+  }
+  
+  /* Show toggle for small tablets */
+  @media screen and (max-width: 900px) {
+    .nav-toggle {
+      display: flex !important;
+    }
+    
+    .nav-links {
+      position: fixed !important;
+      top: 70px !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: rgba(2, 13, 47, 0.98) !important;
+      backdrop-filter: blur(20px) !important;
+      flex-direction: column !important;
+      padding: 30px 20px !important;
+      transform: translateX(-100%) !important;
+      transition: transform 0.3s ease !important;
+      z-index: 999 !important;
+      height: calc(100vh - 70px) !important;
+      overflow-y: auto !important;
+    }
+    
+    .nav-links.active {
+      transform: translateX(0) !important;
+    }
+    
+    .nav-links li {
+      width: 100% !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    .nav-links li:nth-child(n+1) {
+      display: flex !important;
+    }
+    
+    .nav-links a {
+      width: 100% !important;
+      padding: 18px 15px !important;
+      font-size: 18px !important;
+      justify-content: flex-start !important;
+    }
+  }
+}
+
+/* =====================================================
+   MOBILE RESPONSIVE (≤767px)
+   ===================================================== */
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    padding: 10px 15px !important;
+    min-height: 60px !important;
+  }
+  
+  /* Hide site name on mobile */
+  .site-name {
+    display: none !important;
+  }
+  
+  .logo {
+    height: 28px !important;
+  }
+  
+  /* MOBILE TOGGLE BUTTON - FORCE VISIBILITY */
+  .nav-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1001 !important;
+    padding: 0 !important;
+    margin-left: auto !important;
+    transition: all 0.3s ease !important;
+  }
+  
+  .nav-toggle:hover,
+  .nav-toggle:focus {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    transform: scale(1.05) !important;
+    outline: none !important;
+  }
+  
+  /* HAMBURGER ICON */
+  .nav-toggle .hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 26px !important;
+    height: 20px !important;
+    position: relative !important;
+  }
+  
+  .nav-toggle .hamburger span {
+    display: block !important;
+    width: 24px !important;
+    height: 3px !important;
+    background-color: #ffffff !important;
+    margin: 2px 0 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform-origin: center !important;
+    border-radius: 2px !important;
+  }
+  
+  /* HAMBURGER ANIMATION - ACTIVE STATE */
+  .nav-toggle.active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px) !important;
+  }
+  
+  .nav-toggle.active .hamburger span:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+  
+  .nav-toggle.active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px) !important;
+  }
+  
+  /* MOBILE MENU */
+  .nav-links {
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 60px) !important;
+    background: rgba(2, 13, 47, 0.98) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 25px 20px !important;
+    margin: 0 !important;
+    list-style: none !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 1000 !important;
+    overflow-y: auto !important;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .nav-links.active {
+    transform: translateX(0) !important;
+  }
+  
+  .nav-links li {
+    width: 100% !important;
+    margin: 0 0 8px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .nav-links li:last-child {
+    border-bottom: none !important;
+  }
+  
+  .nav-links a {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 20px 15px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-decoration: none !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    min-height: 55px !important;
+    border-radius: 10px !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    transform: translateX(8px) !important;
+  }
+  
+  .nav-links a.active {
+    background: rgba(79, 140, 255, 0.4) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Special mobile menu items */
+  .snakeList {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 20px 15px !important;
+  }
+  
+  .snakeLabel {
+    font-size: 14px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin-top: 8px !important;
+  }
+  
+  #theme-toggle {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    margin-top: 8px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+}
+
+/* =====================================================
+   FOOTER RESPONSIVE - ALL DEVICES
+   ===================================================== */
+
+/* Base Footer Styles */
+.footer {
+  background: #222222 !important;
+  color: #ffffff !important;
+  padding: 50px 30px 30px !important;
+  margin-top: 60px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.footer-content {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  gap: 50px !important;
+  flex-wrap: wrap !important;
+}
+
+.footer-left,
+.footer-about-section,
+.footer-right {
+  flex: 1 !important;
+  min-width: 250px !important;
+}
+
+.footer-left h2 {
+  font-size: 28px !important;
+  margin-bottom: 20px !important;
+  color: #4f8cff !important;
+  font-weight: 700 !important;
+}
+
+.footer-left p {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: #cccccc !important;
+  margin: 0 !important;
+}
+
+.footer-about-section h3,
+.footer-right h4 {
+  font-size: 20px !important;
+  margin-bottom: 25px !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.footer-about-section a {
+  display: block !important;
+  color: #cccccc !important;
+  text-decoration: none !important;
+  padding: 10px 0 !important;
+  font-size: 16px !important;
+  transition: color 0.3s ease !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.footer-about-section a:hover {
+  color: #4f8cff !important;
+  padding-left: 10px !important;
+}
+
+.footer-about-section a:last-child {
+  border-bottom: none !important;
+}
+
+.footer-right ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.footer-right li {
+  margin-bottom: 15px !important;
+}
+
+.footer-right a {
+  color: #cccccc !important;
+  text-decoration: none !important;
+  font-size: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 8px 0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.footer-right a:hover {
+  color: #4f8cff !important;
+  padding-left: 10px !important;
+}
+
+.footer-right a i {
+  font-size: 18px !important;
+  width: 20px !important;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444444 !important;
+  margin-top: 40px !important;
+  padding-top: 25px !important;
+  text-align: center !important;
+}
+
+.footer-bottom p {
+  font-size: 15px !important;
+  color: #999999 !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+.footer-bottom .highlight {
+  color: #4f8cff !important;
+  font-weight: 600 !important;
+}
+
+/* =====================================================
+   TABLET FOOTER (768px - 1024px)
+   ===================================================== */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .footer {
+    padding: 40px 25px 25px !important;
+  }
+  
+  .footer-content {
+    gap: 35px !important;
+  }
+  
+  .footer-left,
+  .footer-about-section,
+  .footer-right {
+    min-width: 200px !important;
+  }
+  
+  .footer-left h2 {
+    font-size: 24px !important;
+  }
+  
+  .footer-about-section h3,
+  .footer-right h4 {
+    font-size: 18px !important;
+  }
+}
+
+/* =====================================================
+   MOBILE FOOTER (≤767px)
+   ===================================================== */
+
+@media screen and (max-width: 767px) {
+  .footer {
+    padding: 30px 20px 20px !important;
+    margin-top: 40px !important;
+  }
+  
+  .footer-content {
+    flex-direction: column !important;
+    gap: 30px !important;
+    text-align: center !important;
+  }
+  
+  .footer-left,
+  .footer-about-section,
+  .footer-right {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    text-align: center !important;
+  }
+  
+  .footer-left h2 {
+    font-size: 24px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .footer-left p {
+    font-size: 16px !important;
+    margin-bottom: 25px !important;
+    max-width: 300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .footer-about-section h3,
+  .footer-right h4 {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+    border-bottom: 2px solid #444444 !important;
+    padding-bottom: 10px !important;
+    display: inline-block !important;
+  }
+  
+  .footer-about-section a {
+    padding: 12px 20px !important;
+    font-size: 16px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+    margin: 5px 0 !important;
+    border-bottom: none !important;
+  }
+  
+  .footer-about-section a:hover {
+    background: rgba(79, 140, 255, 0.2) !important;
+    padding-left: 20px !important;
+    transform: scale(1.02) !important;
+  }
+  
+  .footer-right ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+  }
+  
+  .footer-right li {
+    margin-bottom: 0 !important;
+  }
+  
+  .footer-right a {
+    justify-content: center !important;
+    padding: 15px 20px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+  }
+  
+  .footer-right a:hover {
+    background: rgba(79, 140, 255, 0.2) !important;
+    padding-left: 20px !important;
+    transform: scale(1.02) !important;
+  }
+  
+  .footer-bottom {
+    margin-top: 25px !important;
+    padding-top: 20px !important;
+  }
+  
+  .footer-bottom p {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    padding: 0 10px !important;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE (≤480px)
+   ===================================================== */
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 8px 12px !important;
+  }
+  
+  .nav-toggle {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .nav-links {
+    top: 55px !important;
+    height: calc(100vh - 55px) !important;
+    padding: 20px 15px !important;
+  }
+  
+  .nav-links a {
+    padding: 18px 12px !important;
+    font-size: 17px !important;
+  }
+  
+  .footer {
+    padding: 25px 15px 15px !important;
+  }
+  
+  .footer-content {
+    gap: 25px !important;
+  }
+  
+  .footer-left p {
+    font-size: 15px !important;
+  }
+  
+  .footer-about-section a,
+  .footer-right a {
+    padding: 12px 15px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* =====================================================
+   GENERAL RESPONSIVE UTILITIES
+   ===================================================== */
+
+/* Prevent horizontal scroll */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Responsive images */
+img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Responsive containers */
+.container,
+.info-section,
+.faq-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  box-sizing: border-box !important;
+}
+
+/* Touch scrolling */
+* {
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid #4f8cff !important;
+  outline-offset: 2px !important;
+}
