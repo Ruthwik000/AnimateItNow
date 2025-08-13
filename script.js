@@ -1,4 +1,61 @@
-﻿
+
+// ========================================
+// RESPONSIVE NAVIGATION SYSTEM
+// ========================================
+
+// Mobile Navigation Toggle
+function initMobileNavigation() {
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  
+  if (!navToggle || !navLinks) return;
+  
+  // Toggle mobile navigation
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    
+    // Update toggle button icon
+    const icon = navToggle.querySelector('i');
+    if (navLinks.classList.contains('active')) {
+      icon.className = 'fas fa-times';
+      navToggle.setAttribute('aria-expanded', 'true');
+    } else {
+      icon.className = 'fas fa-bars';
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+  
+  // Close mobile navigation when clicking on a link
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+      navLinks.classList.remove('active');
+      const icon = navToggle.querySelector('i');
+      icon.className = 'fas fa-bars';
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+  
+  // Close mobile navigation when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('active');
+      const icon = navToggle.querySelector('i');
+      icon.className = 'fas fa-bars';
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+  
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      navLinks.classList.remove('active');
+      const icon = navToggle.querySelector('i');
+      icon.className = 'fas fa-bars';
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
 // Function for displaying FAQ categories
 function displaycategory(category){
   const general=document.getElementById('general-faq');
@@ -341,7 +398,7 @@ window.addEventListener("pagehide", () => {
 
 
 // Scroll to top button functionality
-  // Show button when scrolled down
+// Show button when scrolled down
 window.onscroll = function () {
   const btn = document.getElementById("scrollBtn");
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -355,6 +412,11 @@ window.onscroll = function () {
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// Initialize mobile navigation when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initMobileNavigation();
+});
 
 
 

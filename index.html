@@ -42,6 +42,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
   <!-- ProgressBar -->
   <div id="progress-bar"></div>
   <!-- ProgressBar Ends -->
@@ -69,8 +72,14 @@
         </span>
       </a>
     </div>
+    
+    <!-- Mobile Navigation Toggle -->
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    
     <div class="nav-right">
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="templates.html">Templates</a></li>
@@ -139,7 +148,7 @@
     </div>
   </header>
   <!-- ───────── MAIN─────── -->
-  <main>
+  <main id="main-content">
     <!-- ─────── OUR SINGLE STATIC FAQ ─────── -->
     <section id="faq" class="faq-section info-section scroll-fade">
       <div class="faq-container">
