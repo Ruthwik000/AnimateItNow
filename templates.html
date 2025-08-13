@@ -563,7 +563,7 @@
     </style>
   </head>
   <body class="dark">
-    <nav class="navbar scroll-fade">
+    <nav class="navbar scroll-fade" role="navigation" aria-label="Main">
       <div class="nav-left">
         <a href="/" class="logo-link">
           <img src="images/logo.png" alt="AnimateItNow Logo" class="logo" />
@@ -585,9 +585,13 @@
           </span>
         </a>
       </div>
-
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <div class="nav-right">
-        <ul class="nav-links">
+        <ul class="nav-links" id="primary-navigation">
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="templates.html" class="active">Templates</a></li>
@@ -1207,7 +1211,9 @@ document.addEventListener('DOMContentLoaded', function () {
       button.classList.toggle('liked', templateData.hasLiked);
     }
   });
-});
+        });
     </script>
+    <script src="responsive-utils.js"></script>
+    <script>window.ResponsiveManagers && window.ResponsiveManagers.init();</script>
   </body>
 </html>
