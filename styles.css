@@ -575,6 +575,7 @@ body {
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   min-height: 70px;
+  flex-wrap: wrap;
 }
 
 /* Mobile Navigation Toggle */
@@ -590,6 +591,8 @@ body {
   min-height: var(--touch-target-min);
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 1001;
 }
 
 .nav-toggle:hover,
@@ -616,6 +619,11 @@ body {
   margin: 2px 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: center;
+}
+
+/* Ensure hamburger spans are visible */
+.nav-toggle .hamburger span {
+  background-color: #ffffff !important;
 }
 
 /* Hamburger Animation */
@@ -2041,9 +2049,24 @@ body:not(.dark) .template-card {
 }
 
 /* Mobile Navigation Styles */
-@media (max-width: 48rem) { /* 768px */
+@media (max-width: 768px) {
+  .navbar {
+    padding: var(--space-md);
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
   .nav-toggle {
-    display: block;
+    display: block !important;
+    position: relative;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+  
+  .nav-right {
+    position: relative;
   }
   
   .nav-links {
@@ -2063,6 +2086,7 @@ body:not(.dark) .template-card {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     max-height: calc(100vh - 70px);
     overflow-y: auto;
+    z-index: 1000;
   }
   
   .nav-links.active {
@@ -2084,10 +2108,6 @@ body:not(.dark) .template-card {
     font-size: var(--fs-base);
     justify-content: flex-start;
     min-height: 60px;
-  }
-  
-  .navbar {
-    padding: var(--space-md);
   }
   
   .nav-left {

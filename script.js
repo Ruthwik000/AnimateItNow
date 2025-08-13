@@ -5,8 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelector('.nav-links');
   const body = document.body;
 
+  console.log('Navigation elements:', { navToggle, navLinks }); // Debug log
+
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function() {
+    console.log('Navigation initialized successfully'); // Debug log
+    
+    navToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Toggle clicked'); // Debug log
+      
       const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
       
       // Toggle classes
@@ -22,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         body.style.overflow = '';
       }
+      
+      console.log('Menu state:', { isExpanded: !isExpanded, hasActiveClass: navLinks.classList.contains('active') }); // Debug log
     });
 
     // Close menu when clicking on links
@@ -65,6 +74,22 @@ document.addEventListener('DOMContentLoaded', function() {
         body.style.overflow = '';
       }
     });
+  } else {
+    console.log('Navigation elements not found'); // Debug log
+    
+    // Fallback: Try to find elements after a delay
+    setTimeout(function() {
+      const navToggleFallback = document.querySelector('.nav-toggle');
+      const navLinksFallback = document.querySelector('.nav-links');
+      
+      if (navToggleFallback && navLinksFallback) {
+        console.log('Fallback navigation initialized');
+        navToggleFallback.addEventListener('click', function() {
+          navToggleFallback.classList.toggle('active');
+          navLinksFallback.classList.toggle('active');
+        });
+      }
+    }, 1000);
   }
 });
 

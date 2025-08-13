@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Navigation Test</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(2, 13, 47);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-left {
+            flex: 1;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            width: 44px;
+            height: 44px;
+            position: relative;
+            z-index: 1001;
+        }
+        
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: white;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-toggle.active .hamburger span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .nav-toggle.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-toggle.active .hamburger span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block !important;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(2, 13, 47, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            
+            .nav-links li {
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 1rem 0;
+            }
+        }
+        
+        .content {
+            padding: 2rem;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <h2>AnimateItNow</h2>
+        </div>
+        
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+        
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#templates">Templates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="content">
+        <h1>Mobile Navigation Test</h1>
+        <p>Resize your browser window or view on mobile to test the hamburger menu.</p>
+        <p>The hamburger button should appear on screens smaller than 768px width.</p>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            console.log('Elements found:', { navToggle, navLinks });
+            
+            if (navToggle && navLinks) {
+                navToggle.addEventListener('click', function() {
+                    console.log('Toggle clicked');
+                    navToggle.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on links
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navToggle.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
