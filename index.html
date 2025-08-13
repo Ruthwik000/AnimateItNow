@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AnimateItNow</title>
-  <meta name="description" content="A comprehensive collection of CSS animation templates and effects for web developers" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>AnimateItNow - Responsive CSS Animation Library</title>
+  <meta name="description" content="A comprehensive collection of responsive CSS animation templates and effects for web developers. Mobile-first, accessible, and performance-optimized." />
+  <meta name="keywords" content="CSS animations, responsive design, web development, UI components, mobile-first" />
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
   <!-- PWA Meta Tags -->
   <meta name="theme-color" content="#ff6b6b" />
@@ -34,14 +37,27 @@
   <!-- Fallback icon -->
   <link rel="icon" type="image/png" href="images/logo.png" />
 
-  <!-- styles & external resources -->
+  <!-- Resource hints for better performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Critical CSS should be inlined, non-critical can be loaded async -->
   <link rel="stylesheet" href="darkMode.css">
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+  <link rel="stylesheet" href="mobile-nav-fix.css" />
+  <link rel="stylesheet" href="mobile-complete-fix.css" />
+  <link rel="stylesheet" href="ultimate-responsive-fix.css" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Skip to main content for screen readers -->
+  <a href="#main" class="skip-to-main">Skip to main content</a>
+  
   <!-- ProgressBar -->
   <div id="progress-bar"></div>
   <!-- ProgressBar Ends -->
@@ -50,7 +66,7 @@
   <nav class="navbar scroll-fade">
     <div class="nav-left">
       <a href="/" class="logo-link">
-        <img src="images/logo.png" alt="AnimateItNow Logo" class="logo" />
+        <img src="images/logo.png" alt="AnimateItNow Logo" class="logo" width="36" height="36" />
         <span class="site-name">
           <span>A</span>
           <span>n</span>
@@ -69,6 +85,15 @@
         </span>
       </a>
     </div>
+    
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+    
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
@@ -139,22 +164,40 @@
     </div>
   </header>
   <!-- ───────── MAIN─────── -->
-  <main>
+  <main id="main">
     <!-- ─────── OUR SINGLE STATIC FAQ ─────── -->
     <section id="faq" class="faq-section info-section scroll-fade">
       <div class="faq-container">
         <h2 class="faq-title">Frequently Asked Questions</h2>
         <p class="faq-subtitle">Everything you need to know about AnimateItNow</p>
-        <div>
-          <button class="faq-btn" onclick="displaycategory('general')">General</button>
-          <button class="faq-btn" onclick="displaycategory('technical')">Technical</button>
+        <div role="tablist" aria-label="FAQ categories">
+          <button 
+            class="faq-btn" 
+            role="tab"
+            aria-selected="true"
+            aria-controls="general-faq"
+            id="general-tab"
+            onclick="displaycategory('general')"
+          >
+            General
+          </button>
+          <button 
+            class="faq-btn" 
+            role="tab"
+            aria-selected="false"
+            aria-controls="technical-faq"
+            id="technical-tab"
+            onclick="displaycategory('technical')"
+          >
+            Technical
+          </button>
         </div>
         <!--General-->
-        <div id="general-faq">
+        <div id="general-faq" role="tabpanel" aria-labelledby="general-tab">
           <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
+            <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
               What is AnimateItNow?
-            </div>
+            </button>
             <div class="faq-answer">
               AnimateItNow is an open-source platform for sharing and discovering web UI animation components and templates.
             </div>
@@ -202,7 +245,7 @@
               <li class="swiper-slide">
                 <div class="wrapper">
                   <div class="thumbnail">
-                    <img src="images/img1.jpg" alt="Alex">
+                    <img src="images/img1.jpg" alt="Alex" loading="lazy" width="150" height="150">
                   </div>
                   <div class="aside">
                     <p>"AnimateItNow helped me quickly add beautiful animations to my website! Highly recommended."</p>
@@ -216,7 +259,7 @@
               <li class="swiper-slide">
                 <div class="wrapper">
                   <div class="thumbnail">
-                    <img src="images/img2.jpg" alt="Priya">
+                    <img src="images/img2.jpg" alt="Priya" loading="lazy" width="150" height="150">
                   </div>
                   <div class="aside">
                     <p>"A fantastic resource for learning and sharing creative UI effects. The community is super helpful!"</p>
@@ -230,7 +273,7 @@
               <li class="swiper-slide">
                 <div class="wrapper">
                   <div class="thumbnail">
-                    <img src="images/img3.jpg" alt="Sam">
+                    <img src="images/img3.jpg" alt="Sam" loading="lazy" width="150" height="150">
                   </div>
                   <div class="aside">
                     <p>"Contributing to AnimateItNow improved my CSS skills and helped me connect with other developers."</p>
@@ -250,15 +293,17 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-      const swiper = new Swiper(".swiper", {
-        autoHeight: true,
-        loop: true,
-        pagination: { el: ".swiper-pagination" },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
+    <script defer>
+      document.addEventListener('DOMContentLoaded', function() {
+        const swiper = new Swiper(".swiper", {
+          autoHeight: true,
+          loop: true,
+          pagination: { el: ".swiper-pagination" },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+        });
       });
     </script>
     <div class="quote-box">
@@ -324,8 +369,9 @@
     </div>
   </footer>
   <div id="cursor-snake"></div>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="script.js"></script>
+  <script src="responsive-nav-final.js"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="script.js" defer></script>
   <button onclick="scrollToTop()" id="scrollBtn" title="Go to top">↑</button>
 </body>
 </html>
